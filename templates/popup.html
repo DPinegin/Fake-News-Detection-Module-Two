@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erast</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='stylesheets/main.css') }}">
+</head>
+<body>
+    <h1>Erast</h1>
+    <!--Slogan inspired from: https://slogify.com/slogan-for-fake-news/-->
+    <h2>Discard Lies, One Click at a Time.</h2>
+
+    <form action="http://localhost:5000/success" method = "POST">
+        <p>
+            Please paste the text that you would like to check. Afterwards, please click "test". Erast will
+            predict if the text is real or fake.
+        </p>
+        <textarea id="getText" name="text-input" rows="3" cols="100"></textarea>
+        <p><button onClick="getUserInput()" class="button">Test</button></p>
+
+
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+        <script>
+            function getUserInput() {
+                var getText = document.getElementById("getText").value;
+                $.ajax({
+                    type: "POST",
+                    url: "/predict",
+                    data: getText
+                })
+               //document.getElementById("demo").innerHTML = getText;
+            }
+        </script>
+    </form>
+
+    
+</body>
+</html>
